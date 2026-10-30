@@ -2,7 +2,7 @@
 
 Mini-application web de gestion de tâches, conçue en binôme avec l'aide de l'IA (cours Outils IA · Bachelor 1).
 
-- **Équipe :** [Prénom 1] et [Prénom 2] — à compléter
+- **Équipe :** Manyl et Alexis
 - **Filière :** Cybersécurité
 - **Technologies :** HTML, CSS, JavaScript
 - **État :** conception du projet (application non encore développée)
@@ -113,8 +113,3 @@ TaskFlow/
 
 Voir [PROMPTS.md](PROMPTS.md).
 
-## À finaliser avec le binôme
-
-- Renseigner les deux prénoms.
-- Valider les règles et les choix proposés.
-- Créer le dépôt GitHub, puis y ajouter les fichiers.
