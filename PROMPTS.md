@@ -1,71 +1,66 @@
-# Journal des prompts — TaskFlow
+﻿# Journal des prompts — TaskFlow
 
-Ce journal distingue les demandes réellement formulées dans la conversation et les propositions rédigées par l'IA. Les formulations ci-dessous reprennent ou résument les échanges ; elles ne constituent pas un historique exhaustif et littéral de toutes les requêtes.
+**Équipe : Manyl et Alexis**  
+**Filière : Cybersécurité**
 
-| Étape | Demande de l'utilisateur | Utilisation / résultat |
-|---|---|---|
-| Compréhension | « qu'est ce qu'un user story » | Explication de la structure et des critères d'acceptation. |
-| Consigne | « frzngin explique moi » avec la diapositive « Votre mission en 4 étapes » | Compréhension des livrables : binôme, User Stories, architecture, dépôt GitHub. |
-| Préparation | « fais le stp » | Première proposition de projet CoffreFort, ensuite écartée car distincte du README du cours. |
-| Base de données | « nan mais fais le a partir d'une nouvelle base de donnée » | Une variante SQLite a été proposée mais ne correspond pas aux contraintes du README TaskFlow. |
-| Vérification | « faut il remplir quelque chose » en transmettant le README-v2.md | Identification des sections à compléter et des contraintes du cours. |
-| Révision | « remplace directement » | Complétion du README TaskFlow avec choix proposés, 7 User Stories / 3 itérations, architecture sans base de données et modèle d'objet JavaScript. |
+Ce document présente les demandes adressées à l'assistant IA, les choix de développement et les vérifications réalisées. Les formulations des prompts sont synthétisées pour faciliter la lecture ; elles ne constituent pas une transcription littérale des échanges. Le développement des trois sprints a été demandé à partir des consignes de la séance 2, puis confirmé dans la conversation.
 
-## Points à discuter / corriger avec le binôme
+## Séance 1 — Conception du projet
 
-- Valider les règles de robustesse et les seuils de la jauge.
-- Valider les 7 User Stories et leurs critères d'acceptation.
-- Confirmer les propositions refusées et ajuster les justifications en fonction des vrais choix de l'équipe.
-- Ajouter ici les futurs prompts utilisés pour développer et tester l'application, en indiquant ce qui a été conservé, modifié ou rejeté.
+| Objet de la demande | Résultat et décision |
+|---|---|
+| Comprendre la notion de user story et ses critères d'acceptation. | Définition des besoins utilisateurs et des comportements attendus. |
+| Analyser les consignes et identifier les livrables. | Organisation du travail autour des fonctionnalités, de l'architecture et du dépôt GitHub. |
+| Proposer un projet adapté à la filière cybersécurité. | Une première proposition de coffre-fort numérique a été écartée au profit de TaskFlow, conformément au sujet du cours. |
+| Étudier une solution utilisant une base de données. | La variante SQLite a été écartée, car le projet devait fonctionner sans serveur ni base de données. |
+| Compléter le document de conception de TaskFlow. | Rédaction des user stories, proposition d'architecture et définition du modèle de données. |
 
----
+Le document de conception initial est conservé dans [docs/CONCEPTION.md](docs/CONCEPTION.md).
 
-# Journal des prompts — TaskFlow
+## Séance 2 — Développement
 
-Ce journal décrit les demandes utilisées pour générer le projet. La relecture personnelle et les tests manuels de l'élève restent à faire ; les cases non cochées ne sont pas des validations réalisées.
+### Sprint 1 — Gestion des tâches
 
-## Sprint 1 — Gérer les tâches
+**Synthèse du prompt :** « Développer une application TaskFlow en HTML, CSS et JavaScript, sans framework. Permettre la création, l'affichage, la modification, la suppression et la validation d'une tâche. Refuser les titres vides ou composés uniquement d'espaces. »
 
-**Prompt de génération proposé :** « Crée une application TaskFlow en HTML et JavaScript sans framework. Permets de créer, afficher, modifier, supprimer et terminer une tâche. Refuse les titres vides ou composés d'espaces. Affiche les titres avec textContent. »
+- **Éléments conservés :** tableau d'objets représentant les tâches, affichage avec `textContent` et case à cocher pour terminer ou réactiver une tâche.
+- **Éléments modifiés :** validation des titres avec `trim()` lors de la création et de la modification, limite de 120 caractères et identifiant unique par tâche.
+- **Éléments rejetés :** insertion des titres avec `innerHTML`, afin de ne pas interpréter une saisie utilisateur comme du code HTML.
+- **Vérifications réalisées :** tests avec DOM simulé couvrant l'ajout, la modification, la suppression, le changement d'état, le refus des titres composés d'espaces et l'affichage d'une chaîne HTML comme du texte.
+- **Commit :** `067fd89` — Sprint 1 : ajouter la gestion complète des tâches.
 
-- Gardé : tableau de tâches, fonctions courtes, événements du DOM, titres limités à 120 caractères.
-- Modifié : suppression par identifiant unique et validation après trim à la création comme à la modification.
-- Rejeté : insertion des titres avec innerHTML et dépendances inutiles.
-- À expliquer : tableau, objet, filter, addEventListener, trim et textContent.
-- [ ] Tester ajout, affichage, modification, suppression et case terminée.
-- [ ] Tester un titre vide, des espaces, l'annulation de la modification et un titre `<img src=x onerror=alert(1)>`.
+### Sprint 2 — Sauvegarde et interface
 
-## Sprint 2 — Sauvegarde et CSS
+**Synthèse du prompt :** « Enregistrer les tâches dans localStorage après chaque action et les restaurer au démarrage. Gérer les erreurs de stockage et les données invalides. Ajouter une interface CSS adaptée aux différentes tailles d'écran. »
 
-**Prompt :** « Sauvegarde les tâches dans localStorage après chaque action et restaure-les au démarrage. Gère un stockage illisible ou indisponible. Ajoute un style sobre, responsive et des états de focus visibles. »
+- **Éléments conservés :** sérialisation JSON, sauvegarde dans `localStorage`, compteur de tâches terminées et présentation visuelle sobre.
+- **Éléments modifiés :** validation des données restaurées, traitement des erreurs avec `try/catch`, adaptation de la disposition aux petits écrans et indication visible du focus au clavier.
+- **Éléments rejetés :** bibliothèque CSS et service de sauvegarde externe, non nécessaires au périmètre du projet.
+- **Vérifications réalisées :** tests avec DOM simulé couvrant la restauration des tâches et de leur état, ainsi que le traitement de données JSON corrompues.
+- **Correction issue de la relecture :** l'ordre d'affichage des messages a été ajusté pour préserver le message d'erreur en cas d'échec de sauvegarde. Cette correction est intégrée au commit du sprint 3.
+- **Commit :** `27cc5f0` — Sprint 2 : sauvegarder les tâches et ajouter le style responsive.
 
-- Gardé : JSON.stringify / JSON.parse, mise en page verte et crème, compteur de tâches terminées.
-- Modifié : validation du format des données et des identifiants avant leur restauration.
-- Rejeté : services externes et bibliothèque CSS pour cette petite application.
-- À expliquer : stockage local, try/catch, media queries et différence entre données en mémoire et données persistantes.
-- [ ] Recharger après ajout, modification, suppression et changement d'état.
-- [ ] Vérifier sur écran étroit et au clavier.
-- [ ] Mettre du JSON invalide dans le stockage, recharger et vérifier le message.
+### Sprint 3 — Connexion et contrôle du mot de passe
 
-## Sprint 3 — Connexion et mot de passe
+**Synthèse du prompt :** « Ajouter une connexion locale et vérifier les critères de composition du mot de passe. Ne pas enregistrer le mot de passe en clair dans localStorage. Présenter les limites d'un mécanisme de connexion exécuté uniquement dans le navigateur. »
 
-**Prompt :** « Ajoute un compte local et la connexion. Vérifie un mot de passe de 12 à 128 caractères avec minuscule, majuscule, chiffre et symbole. Ne stocke jamais le mot de passe en clair : utilise Web Crypto, PBKDF2-SHA-256 et un sel aléatoire. Explique les limites de cette démonstration côté navigateur. »
+- **Éléments conservés :** création d'un compte local, connexion, déconnexion et messages de validation.
+- **Éléments modifiés :** longueur de 12 à 128 caractères, présence d'une minuscule, d'une majuscule, d'un chiffre et d'un symbole ; dérivation PBKDF2-SHA-256 avec un sel aléatoire et 600 000 itérations ; prévention des soumissions simultanées.
+- **Éléments rejetés :** stockage du mot de passe en clair, simple encodage Base64 et présentation de la connexion locale comme une authentification de production.
+- **Vérifications réalisées :** tests avec DOM simulé couvrant les critères du mot de passe, la création du compte, le format du sel et du dérivé, l'absence de mot de passe en clair dans le stockage, le refus d'un mot de passe incorrect, la connexion avec les identifiants attendus et la déconnexion.
+- **Commit :** `508c364` — Sprint 3 : ajouter la connexion locale et le contrôle du mot de passe.
 
-- Gardé : Web Crypto natif, sel aléatoire, 600 000 itérations, déconnexion et messages d'erreur.
-- Modifié : un seul compte local, double soumission bloquée, vérification du format du compte sauvegardé.
-- Rejeté : mot de passe en clair, simple encodage Base64, promesse d'une authentification sécurisée avec seulement du JavaScript côté client.
-- À expliquer : hachage dérivé, sel, promesse/async-await, stockage local et différence entre masquer une interface et protéger des données.
-- [ ] Tester les critères, le bon et le mauvais mot de passe, puis la déconnexion et le rechargement.
-- [ ] Inspecter le stockage et vérifier l'absence de mot de passe en clair.
-- [ ] Expliquer pourquoi cette connexion locale reste contournable.
+## Bilan des vérifications
 
-## État de la livraison
+La syntaxe des scripts JavaScript et les scénarios fonctionnels décrits ci-dessus ont été vérifiés automatiquement avec un DOM simulé. Les tests dans un navigateur réel n'ont pas pu être menés à terme, le dispositif de contrôle du navigateur ayant interrompu l'exécution.
 
-Contrôles de génération : syntaxe des scripts et scénarios fonctionnels testés avec un DOM simulé (tâches, stockage et connexion). Ajustement après contrôle : le message d'échec de sauvegarde n'est plus masqué par le message d'ajout. Aucun test visuel dans un navigateur réel n'a été réalisé.
+Les points suivants restent à vérifier avant le rendu :
 
-Les trois commits sont des étapes de génération. Ils ne certifient pas la compréhension du code par l'élève. Dépôt de destination : https://github.com/alexisglombard-cyber/Projet-Outils-IA. Tests manuels à finaliser avant de rendre.
+- le rendu sur ordinateur et sur écran étroit ;
+- la navigation au clavier dans les formulaires ;
+- le parcours complet dans le navigateur : création du compte, gestion des tâches, rechargement et reconnexion ;
+- la compréhension du code et la justification des choix techniques par le binôme.
 
+## Publication et traçabilité
 
-## Intégration GitHub
-
-Demande réellement reçue : publier dans `https://github.com/alexisglombard-cyber/Projet-Outils-IA`. Historique existant conservé par fusion ; document de conception conservé dans `docs/CONCEPTION.md`.
+Les trois commits de sprint sont publiés dans le dépôt [Projet-Outils-IA](https://github.com/alexisglombard-cyber/Projet-Outils-IA). L'historique et le document de conception de la séance 1 ont été conservés lors de l'intégration.
