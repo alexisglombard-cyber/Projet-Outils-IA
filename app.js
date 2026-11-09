@@ -87,11 +87,11 @@ form.addEventListener("submit", event => {
     return;
   }
   tasks.push({ id: crypto.randomUUID(), title, done: false });
+  message.textContent = "Tâche ajoutée.";
   saveTasks();
   renderTasks();
   form.reset();
   input.focus();
-  message.textContent = "Tâche ajoutée.";
 });
 
 loadTasks();

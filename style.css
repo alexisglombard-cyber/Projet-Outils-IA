@@ -35,3 +35,7 @@ input[type=checkbox] { width: 20px; height: 20px; flex-shrink: 0; accent-color: 
 footer { border-top: 1px solid #d8dfd7; color: #617168; padding: 24px 0; font-size: 12px; }
 @media (max-width: 620px) { main { padding: 0 18px; } section { margin: 36px 0; } .input-row, li { flex-direction: column; align-items: stretch; } .actions button { flex: 1; } .badge { font-size: 10px; } }
 [hidden] { display: none !important; }
+.session { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 28px; font-size: 14px; }
+#auth { max-width: 690px; }
+#auth-form > input { margin-bottom: 20px; }
+#password-help, .local-note { color: #617168; font-size: 13px; line-height: 1.6; }

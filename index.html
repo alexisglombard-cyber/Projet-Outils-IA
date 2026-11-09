@@ -6,11 +6,29 @@
   <title>TaskFlow — Mes tâches</title>
   <link rel="stylesheet" href="style.css">
   <script src="app.js" defer></script>
+  <script src="auth.js" defer></script>
 </head>
 <body>
   <main>
     <header><span class="brand">TaskFlow<span class="dot">.</span></span><span class="badge">Mon espace de travail</span></header>
-    <section id="workspace">
+    <section id="auth">
+      <p class="eyebrow">VOTRE PETIT COIN D'ORGANISATION</p>
+      <h1>Bienvenue sur TaskFlow.</h1>
+      <p class="intro">Connectez-vous pour retrouver vos prochaines étapes.</p>
+      <form id="auth-form">
+        <label for="username">Nom d'utilisateur</label>
+        <input id="username" autocomplete="username" required maxlength="40">
+        <label for="password">Mot de passe</label>
+        <input id="password" type="password" autocomplete="current-password" required maxlength="128" aria-describedby="password-help password-feedback">
+        <p id="password-help">Pour créer le compte : 12 à 128 caractères, avec minuscule, majuscule, chiffre et symbole, sans espaces en début ou fin.</p>
+        <p id="password-feedback" role="status"></p>
+        <div class="input-row"><button id="login" type="submit">Se connecter</button><button id="register" class="secondary" type="button">Créer le compte local</button></div>
+        <p id="auth-message" role="status" aria-live="polite"></p>
+      </form>
+      <p class="local-note">Exercice de connexion locale · Un compte par navigateur. Les tâches restent lisibles dans le stockage du navigateur ; cette démonstration ne protège pas des données sensibles.</p>
+    </section>
+    <section id="workspace" hidden>
+      <div class="session"><span id="session-user"></span><button id="logout" class="secondary" type="button">Se déconnecter</button></div>
       <p class="eyebrow">UNE CHOSE À LA FOIS</p>
       <h1>Place à vos projets.</h1>
       <p class="intro">Une idée, une tâche, un pas de plus.</p>

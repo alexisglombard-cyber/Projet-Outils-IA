@@ -24,3 +24,21 @@ Ce journal décrit les demandes utilisées pour générer le projet. La relectur
 - [ ] Recharger après ajout, modification, suppression et changement d'état.
 - [ ] Vérifier sur écran étroit et au clavier.
 - [ ] Mettre du JSON invalide dans le stockage, recharger et vérifier le message.
+
+## Sprint 3 — Connexion et mot de passe
+
+**Prompt :** « Ajoute un compte local et la connexion. Vérifie un mot de passe de 12 à 128 caractères avec minuscule, majuscule, chiffre et symbole. Ne stocke jamais le mot de passe en clair : utilise Web Crypto, PBKDF2-SHA-256 et un sel aléatoire. Explique les limites de cette démonstration côté navigateur. »
+
+- Gardé : Web Crypto natif, sel aléatoire, 600 000 itérations, déconnexion et messages d'erreur.
+- Modifié : un seul compte local, double soumission bloquée, vérification du format du compte sauvegardé.
+- Rejeté : mot de passe en clair, simple encodage Base64, promesse d'une authentification sécurisée avec seulement du JavaScript côté client.
+- À expliquer : hachage dérivé, sel, promesse/async-await, stockage local et différence entre masquer une interface et protéger des données.
+- [ ] Tester les critères, le bon et le mauvais mot de passe, puis la déconnexion et le rechargement.
+- [ ] Inspecter le stockage et vérifier l'absence de mot de passe en clair.
+- [ ] Expliquer pourquoi cette connexion locale reste contournable.
+
+## État de la livraison
+
+Contrôles de génération : syntaxe des scripts et scénarios fonctionnels testés avec un DOM simulé (tâches, stockage et connexion). Ajustement après contrôle : le message d'échec de sauvegarde n'est plus masqué par le message d'ajout. Aucun test visuel dans un navigateur réel n'a été réalisé.
+
+Les trois commits sont des étapes de génération. Ils ne certifient pas la compréhension du code par l'élève. Publication GitHub et tests manuels à finaliser avant de rendre.
