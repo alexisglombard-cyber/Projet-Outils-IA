@@ -1,2 +1,37 @@
-﻿body { font-family: system-ui, sans-serif; max-width: 960px; margin: 40px auto; padding: 20px; }
+* { box-sizing: border-box; }
+:root { color: #202c29; background: #f4f6f2; font-family: system-ui, sans-serif; }
+body { margin: 0; }
+main { max-width: 1000px; margin: auto; padding: 0 32px; }
+header { display: flex; justify-content: space-between; align-items: center; padding: 30px 0; border-bottom: 1px solid #d8dfd7; gap: 16px; }
+.brand { font-size: 27px; font-weight: 800; letter-spacing: -1px; }
+.dot { color: #347b4f; }
+.badge { font-size: 12px; background: #e5eddf; border-radius: 24px; padding: 8px 14px; }
+section { margin: 64px 0; }
+.eyebrow { color: #47744f; font-size: 12px; font-weight: 750; letter-spacing: 2px; }
+h1 { font-size: clamp(32px, 6vw, 52px); letter-spacing: -2px; margin: 16px 0; }
+.intro { color: #617168; margin-bottom: 36px; }
+form { background: white; border: 1px solid #d9e1d7; border-radius: 16px; padding: 24px; }
+form > label { display: block; font-weight: 650; font-size: 14px; margin-bottom: 12px; }
+.input-row { display: flex; gap: 12px; }
+input:not([type=checkbox]) { width: 100%; min-width: 0; border: 1px solid #c3cfc3; background: #fafbf9; padding: 14px; border-radius: 8px; font: inherit; }
+button { cursor: pointer; border: 0; border-radius: 8px; padding: 12px 18px; background: #285c3c; color: white; font: inherit; font-size: 14px; font-weight: 600; white-space: nowrap; }
+button:hover { filter: brightness(.9); }
+button:disabled { opacity: .6; cursor: wait; }
+:focus-visible { outline: 3px solid #d18c26; outline-offset: 3px; }
+.list-heading { display: flex; align-items: center; justify-content: space-between; margin-top: 32px; }
+h2 { font-size: 20px; }
+#count { color: #617168; font-size: 13px; }
+ul { padding: 0; list-style: none; }
+li { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 10px 0; padding: 20px; border: 1px solid #d9e1d7; border-radius: 12px; background: white; }
+li label { display: flex; align-items: center; gap: 12px; min-width: 0; }
+li span { overflow-wrap: anywhere; }
+input[type=checkbox] { width: 20px; height: 20px; flex-shrink: 0; accent-color: #285c3c; }
+.done label span { text-decoration: line-through; color: #64746a; }
+.actions { display: flex; gap: 8px; }
+.actions button, .secondary { background: #eaf0e7; color: #285c3c; }
+.actions .danger { background: #f8efeb; color: #993d30; }
+#empty { text-align: center; padding: 40px 16px; border: 1px dashed #bacbb6; border-radius: 12px; color: #617168; }
+[role=status] { min-height: 24px; color: #85501b; font-size: 14px; }
+footer { border-top: 1px solid #d8dfd7; color: #617168; padding: 24px 0; font-size: 12px; }
+@media (max-width: 620px) { main { padding: 0 18px; } section { margin: 36px 0; } .input-row, li { flex-direction: column; align-items: stretch; } .actions button { flex: 1; } .badge { font-size: 10px; } }
 [hidden] { display: none !important; }

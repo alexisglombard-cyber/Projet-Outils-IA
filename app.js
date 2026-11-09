@@ -1,4 +1,4 @@
-﻿"use strict";
+"use strict";
 
 let tasks = [];
 const form = document.querySelector("#task-form");
@@ -7,7 +7,26 @@ const list = document.querySelector("#task-list");
 const message = document.querySelector("#message");
 
 function saveTasks() {
-  // La sauvegarde sera ajoutée au sprint 2.
+  try {
+    localStorage.setItem("taskflow.tasks", JSON.stringify(tasks));
+  } catch {
+    message.textContent = "Sauvegarde indisponible : les changements restent dans cet onglet.";
+  }
+}
+
+function loadTasks() {
+  try {
+    const saved = JSON.parse(localStorage.getItem("taskflow.tasks") || "[]");
+    if (!Array.isArray(saved) || !saved.every(task =>
+      task && typeof task.id === "string" && typeof task.title === "string" &&
+      task.title.trim().length > 0 && task.title.length <= 120 && typeof task.done === "boolean"
+    ) || new Set(saved.map(task => task.id)).size !== saved.length) {
+      throw new Error("Données invalides");
+    }
+    tasks = saved;
+  } catch {
+    message.textContent = "Impossible de lire les tâches sauvegardées. La liste démarre vide.";
+  }
 }
 
 function renderTasks() {
@@ -33,10 +52,10 @@ function renderTasks() {
     const edit = document.createElement("button");
     edit.textContent = "Modifier";
     edit.addEventListener("click", () => {
-      const nextTitle = window.prompt("Modifier la tÃ¢che :", task.title);
+      const nextTitle = window.prompt("Modifier la tâche :", task.title);
       if (nextTitle === null) return;
       if (!nextTitle.trim() || nextTitle.trim().length > 120) {
-        message.textContent = "Le titre doit contenir entre 1 et 120 caractÃ¨res.";
+        message.textContent = "Le titre doit contenir entre 1 et 120 caractères.";
         return;
       }
       task.title = nextTitle.trim();
@@ -56,14 +75,14 @@ function renderTasks() {
     list.append(item);
   }
   document.querySelector("#empty").hidden = tasks.length > 0;
-  document.querySelector("#count").textContent = `${tasks.filter(task => task.done).length} / ${tasks.length} terminÃ©es`;
+  document.querySelector("#count").textContent = `${tasks.filter(task => task.done).length} / ${tasks.length} terminées`;
 }
 
 form.addEventListener("submit", event => {
   event.preventDefault();
   const title = input.value.trim();
   if (!title || title.length > 120) {
-    message.textContent = "Le titre doit contenir entre 1 et 120 caractÃ¨res.";
+    message.textContent = "Le titre doit contenir entre 1 et 120 caractères.";
     input.focus();
     return;
   }
@@ -72,8 +91,8 @@ form.addEventListener("submit", event => {
   renderTasks();
   form.reset();
   input.focus();
-  message.textContent = "TÃ¢che ajoutÃ©e.";
+  message.textContent = "Tâche ajoutée.";
 });
 
+loadTasks();
 renderTasks();
-
