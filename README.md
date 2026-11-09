@@ -1,5 +1,9 @@
 # TaskFlow — Séance 2
 
+**Équipe : Manyl et Alexis · Cybersécurité.**
+
+Le [document de conception de la séance 1](docs/CONCEPTION.md) est conservé. Cette version couvre le périmètre de la séance 2 : titres et état des tâches, sauvegarde et connexion locale. Les priorités, échéances, confirmation de suppression et jauge à trois niveaux prévues dans la conception restent à développer. Le mot de passe exige ici au moins 12 caractères.
+
 Application pédagogique sans framework : gestion de tâches, sauvegarde locale et début de fonctionnalité cyber.
 
 ## Ouvrir l'application
@@ -50,4 +54,4 @@ git remote add origin https://github.com/VOTRE-COMPTE/taskflow.git
 git push -u origin HEAD
 ```
 
-Le dépôt distant n'est pas encore configuré. Avant de rendre, relire le code, réaliser les tests manuels et compléter `PROMPTS.md` avec vos propres observations.
+Dépôt GitHub configuré : [Projet-Outils-IA](https://github.com/alexisglombard-cyber/Projet-Outils-IA). Avant de rendre, relire le code, réaliser les tests manuels et compléter `PROMPTS.md` avec vos propres observations.
