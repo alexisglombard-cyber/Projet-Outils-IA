@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TaskFlow — Mes tâches</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <main>
+    <header><span class="brand">TaskFlow<span class="dot">.</span></span><span class="badge">Mon espace de travail</span></header>
+    <section id="workspace">
+      <p class="eyebrow">UNE CHOSE À LA FOIS</p>
+      <h1>Place à vos projets.</h1>
+      <p class="intro">Une idée, une tâche, un pas de plus.</p>
+      <form id="task-form">
+        <label for="task-title">Nouvelle tâche</label>
+        <div class="input-row"><input id="task-title" maxlength="120" required placeholder="Que voulez-vous accomplir ?"><button>Ajouter une tâche</button></div>
+      </form>
+      <p id="message" role="status" aria-live="polite"></p>
+      <div class="list-heading"><h2>Mes tâches</h2><span id="count"></span></div>
+      <ul id="task-list"></ul>
+      <p id="empty">Votre liste est vide. Ajoutez votre première tâche.</p>
+    </section>
+    <footer>TaskFlow · Séance 2 · Un peu d'organisation, beaucoup de possibilités.</footer>
+  </main>
+</body>
+</html>
